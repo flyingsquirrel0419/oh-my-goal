@@ -17,13 +17,11 @@ Set one objective. Let the agent keep going until the work is done, blocked, pau
 
 [Install](#install) · [Usage](#usage) · [How It Works](#how-it-works) · [Contributing](#contributing)
 
+![oh-my-goal terminal demo](./docs/demo.svg)
+
 </div>
 
 ---
-
-## Demo
-
-![oh-my-goal terminal demo](./docs/demo.svg)
 
 ## Why
 
