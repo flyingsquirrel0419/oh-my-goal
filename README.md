@@ -59,6 +59,11 @@ Add it to `opencode.json`:
 }
 ```
 
+For local use before publishing, build the repo and run OpenCode from this project. The repository includes:
+
+- `.opencode/plugins/oh-my-goal.js` to load the built plugin locally
+- `.opencode/commands/goal.md` so the TUI registers `/goal`
+
 ## Usage
 
 Start a goal:

@@ -13,6 +13,8 @@
   },
   "files": [
     "dist",
+    ".opencode/commands/goal.md",
+    ".opencode/plugins/oh-my-goal.js",
     "docs/demo.svg",
     "README.md",
     "CHANGELOG.md"
