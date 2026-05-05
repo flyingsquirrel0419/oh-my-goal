@@ -1,0 +1,99 @@
+<svg width="920" height="520" viewBox="0 0 920 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">oh-my-goal terminal demo</title>
+  <desc id="desc">Animated terminal showing the OpenCode /goal command starting an autonomous goal loop.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="920" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101828"/>
+      <stop offset="0.55" stop-color="#172033"/>
+      <stop offset="1" stop-color="#092019"/>
+    </linearGradient>
+    <filter id="shadow" x="40" y="34" width="840" height="452" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+      .line {
+        font-size: 22px;
+        fill: #d9e4f5;
+      }
+      .muted {
+        fill: #8492a6;
+      }
+      .ok {
+        fill: #5eead4;
+      }
+      .warn {
+        fill: #fbbf24;
+      }
+      .prompt {
+        fill: #7dd3fc;
+      }
+      .cursor {
+        animation: blink 1s steps(2, start) infinite;
+      }
+      .reveal-1 {
+        opacity: 0;
+        animation: show 0.2s linear 0.2s forwards;
+      }
+      .reveal-2 {
+        opacity: 0;
+        animation: show 0.2s linear 1.3s forwards;
+      }
+      .reveal-3 {
+        opacity: 0;
+        animation: show 0.2s linear 2.2s forwards;
+      }
+      .reveal-4 {
+        opacity: 0;
+        animation: show 0.2s linear 3.2s forwards;
+      }
+      .reveal-5 {
+        opacity: 0;
+        animation: show 0.2s linear 4.2s forwards;
+      }
+      .reveal-6 {
+        opacity: 0;
+        animation: show 0.2s linear 5.1s forwards;
+      }
+      .reveal-7 {
+        opacity: 0;
+        animation: show 0.2s linear 6.1s forwards;
+      }
+      @keyframes show {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </defs>
+
+  <rect width="920" height="520" rx="26" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <rect x="70" y="58" width="780" height="398" rx="18" fill="#0b1220"/>
+    <rect x="70" y="58" width="780" height="46" rx="18" fill="#111827"/>
+    <path d="M70 86H850" stroke="#1f2937"/>
+    <circle cx="100" cy="81" r="7" fill="#ef4444"/>
+    <circle cx="124" cy="81" r="7" fill="#f59e0b"/>
+    <circle cx="148" cy="81" r="7" fill="#22c55e"/>
+    <text x="460" y="88" text-anchor="middle" class="mono" font-size="15" fill="#94a3b8">opencode · oh-my-goal</text>
+
+    <g class="mono line">
+      <text x="100" y="140"><tspan class="prompt">$</tspan> opencode</text>
+      <text x="100" y="184" class="reveal-1"><tspan class="prompt">›</tspan> /goal fix flaky login redirect test</text>
+      <text x="100" y="228" class="reveal-2"><tspan class="ok">✓</tspan> Goal started: fix flaky login redirect test</text>
+      <text x="100" y="272" class="reveal-3"><tspan class="muted">idle</tspan> → injecting Active Goal Check</text>
+      <text x="100" y="316" class="reveal-4"><tspan class="warn">…</tspan> inspecting auth redirect flow</text>
+      <text x="100" y="360" class="reveal-5"><tspan class="warn">…</tspan> updating regression coverage</text>
+      <text x="100" y="404" class="reveal-6"><tspan class="ok">✓</tspan> GOAL_ACHIEVED: redirect test is stable</text>
+      <text x="100" y="438" class="reveal-7" font-size="18" fill="#94a3b8">State saved in .opencode/goal.json · loop stopped</text>
+      <rect x="720" y="421" width="13" height="24" fill="#d9e4f5" class="cursor reveal-7"/>
+    </g>
+  </g>
+</svg>

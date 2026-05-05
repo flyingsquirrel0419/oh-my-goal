@@ -21,6 +21,10 @@ Set one objective. Let the agent keep going until the work is done, blocked, pau
 
 ---
 
+## Demo
+
+![oh-my-goal terminal demo](./docs/demo.svg)
+
 ## Why
 
 OpenCode already has powerful automation plugins. Many of them are built for advanced orchestration: multiple agents, metrics, scopes, model maps, verification plans.
