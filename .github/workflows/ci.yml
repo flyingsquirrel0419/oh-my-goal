@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Prettier check
+        run: npm run format:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev
+
+      - name: Success summary
+        if: success()
+        run: |
+          {
+            echo "## CI passed"
+            echo ""
+            echo "- Type check passed"
+            echo "- Lint passed"
+            echo "- Prettier check passed"
+            echo "- Build passed"
+            echo "- Production dependency audit passed"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Failure summary
+        if: failure()
+        run: |
+          {
+            echo "## CI failed"
+            echo ""
+            echo "One or more required checks failed. Open the failed step above for the exact command output."
+            echo ""
+            echo "Required checks:"
+            echo "- npm run typecheck"
+            echo "- npm run lint"
+            echo "- npm run format:check"
+            echo "- npm run build"
+            echo "- npm audit --omit=dev"
+          } >> "$GITHUB_STEP_SUMMARY"

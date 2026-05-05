@@ -42,7 +42,9 @@ export function createGoalLoopHandler(store: GoalStore, client?: unknown) {
         ...current.history,
         {
           iteration: current.iteration + 1,
-          summary: shouldWarn ? "Injected budget warning and continuation prompt." : "Injected continuation prompt.",
+          summary: shouldWarn
+            ? "Injected budget warning and continuation prompt."
+            : "Injected continuation prompt.",
           status: "in_progress",
           created_at: new Date().toISOString(),
         },
@@ -74,7 +76,11 @@ export function createGoalLoopHandler(store: GoalStore, client?: unknown) {
     const goal = await store.read()
     if (!goal || goal.status !== "pursuing") return
 
-    const messageID = extractString(input, ["info.id", "properties.info.id", "event.properties.info.id"])
+    const messageID = extractString(input, [
+      "info.id",
+      "properties.info.id",
+      "event.properties.info.id",
+    ])
     if (messageID && messageID === goal.last_message_id) return
 
     const sessionID = extractSessionID(input)
@@ -151,7 +157,11 @@ Continue preserving this goal state after compaction.`
     }
   }
 
-  async function log(opencodeClient: unknown, level: "info" | "warn" | "error", message: string): Promise<void> {
+  async function log(
+    opencodeClient: unknown,
+    level: "info" | "warn" | "error",
+    message: string,
+  ): Promise<void> {
     const app = isRecord(opencodeClient) ? opencodeClient.app : undefined
     const logger = isRecord(app) ? app.log : undefined
     if (typeof logger !== "function") return
@@ -206,7 +216,11 @@ async function extractResponseText(input: unknown, client: unknown): Promise<str
   if (direct) return direct
 
   const sessionID = extractSessionID(input)
-  const messageID = extractString(input, ["info.id", "properties.info.id", "event.properties.info.id"])
+  const messageID = extractString(input, [
+    "info.id",
+    "properties.info.id",
+    "event.properties.info.id",
+  ])
   if (!sessionID || !messageID) return JSON.stringify(input)
 
   const session = isRecord(client) ? client.session : undefined
@@ -230,7 +244,12 @@ function collectTextForMessage(value: unknown, messageID: string): string {
     }
     if (!isRecord(node)) return
 
-    const id = typeof node.messageID === "string" ? node.messageID : typeof node.id === "string" ? node.id : undefined
+    const id =
+      typeof node.messageID === "string"
+        ? node.messageID
+        : typeof node.id === "string"
+          ? node.id
+          : undefined
     if (id === messageID && typeof node.text === "string") chunks.push(node.text)
     for (const value of Object.values(node)) visit(value)
   }
@@ -240,7 +259,11 @@ function collectTextForMessage(value: unknown, messageID: string): string {
 
 function extractTokens(input: unknown): number | undefined {
   const candidates = [
-    extractNumber(input, ["info.tokens.total", "properties.info.tokens.total", "event.properties.info.tokens.total"]),
+    extractNumber(input, [
+      "info.tokens.total",
+      "properties.info.tokens.total",
+      "event.properties.info.tokens.total",
+    ]),
     sumNumbers(input, [
       "info.tokens.input",
       "info.tokens.output",
@@ -254,7 +277,9 @@ function extractTokens(input: unknown): number | undefined {
       "properties.info.tokens.cache.write",
     ]),
   ]
-  return candidates.find((value): value is number => typeof value === "number" && Number.isFinite(value))
+  return candidates.find(
+    (value): value is number => typeof value === "number" && Number.isFinite(value),
+  )
 }
 
 function estimateTokens(text: string): number | undefined {

@@ -2,13 +2,7 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { z } from "zod"
 
-export const goalStatuses = [
-  "pursuing",
-  "paused",
-  "achieved",
-  "budget-limited",
-  "blocked",
-] as const
+export const goalStatuses = ["pursuing", "paused", "achieved", "budget-limited", "blocked"] as const
 
 export type GoalStatus = (typeof goalStatuses)[number]
 

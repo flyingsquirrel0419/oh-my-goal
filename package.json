@@ -13,10 +13,16 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepack": "npm run build"
   },
@@ -34,7 +40,7 @@
     "url": "https://github.com/flyingsquirrel0419/oh-my-goal/issues"
   },
   "homepage": "https://github.com/flyingsquirrel0419/oh-my-goal#readme",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "zod": "^3.25.76"
   },
@@ -47,9 +53,13 @@
     }
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@opencode-ai/plugin": "^1.14.35",
     "@types/node": "^22.15.0",
-    "typescript": "^5.8.3"
+    "eslint": "^10.3.0",
+    "prettier": "^3.8.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.59.2"
   },
   "engines": {
     "node": ">=20"

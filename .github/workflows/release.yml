@@ -1,0 +1,82 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Prettier check
+        run: npm run format:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Skip publish when token is missing
+        if: ${{ env.NPM_TOKEN == '' }}
+        run: |
+          {
+            echo "## Release skipped"
+            echo ""
+            echo "NPM_TOKEN secret is not configured, so npm publish was skipped without failing the workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish package
+        if: ${{ env.NPM_TOKEN != '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
+        run: npm publish --access public
+
+      - name: Success summary
+        if: success()
+        run: |
+          {
+            echo "## Release workflow completed"
+            echo ""
+            if [ -n "${NPM_TOKEN:-}" ]; then
+              echo "- Package published to npm"
+            else
+              echo "- Publish skipped because NPM_TOKEN was not configured"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Failure summary
+        if: failure()
+        run: |
+          {
+            echo "## Release failed"
+            echo ""
+            echo "The release workflow failed. Check the failed step above for the exact command output."
+            echo ""
+            echo "Expected secret:"
+            echo "- NPM_TOKEN"
+          } >> "$GITHUB_STEP_SUMMARY"
