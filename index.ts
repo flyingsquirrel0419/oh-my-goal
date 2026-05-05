@@ -5,7 +5,7 @@ import { createGoalLoopHandler } from "./src/handlers/loop.js"
 import { createGoalStore } from "./src/goal-store.js"
 
 export const OhMyGoal: Plugin = async (ctx) => {
-  const root = ctx.worktree || ctx.directory
+  const root = ctx.directory || ctx.worktree
   const store = createGoalStore(root)
   const command = createGoalCommandHandler(store)
   const loop = createGoalLoopHandler(store, ctx.client)
