@@ -15,7 +15,7 @@ def main() -> int:
         "/bin/bash",
         ["--noprofile", "--norc", "-i"],
         cwd="/root/oh-my-goal",
-        dimensions=(16, 120),
+        dimensions=(34, 120),
         encoding="utf-8",
         env=env,
     )

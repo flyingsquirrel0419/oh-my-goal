@@ -14,9 +14,6 @@ OSC = re.compile(r"\x1b\].*?(?:\x07|\x1b\\)", re.DOTALL)
 PRIVATE_MODE = re.compile(r"\x1b\[\?[0-9;]*[hl]")
 TERMINAL_QUERY = re.compile(r"\x1b\[(?:>|=)?[0-9;?]*[nqt]")
 SIXEL_CURSOR = re.compile(r"\x1b\[>?[0-9;]* q")
-BLOCK_ART_TEXT = re.compile(r"<text\b[^>]*>(?=[^<]*(?:&#9600;|&#9604;))[^<]*</text>")
-
-
 def clean_output(text: str) -> str:
     text = DCS.sub("", text)
     text = OSC.sub("", text)
@@ -55,7 +52,6 @@ def main() -> int:
             ],
             check=True,
         )
-        SVG.write_text(BLOCK_ART_TEXT.sub("", SVG.read_text(encoding="utf-8")), encoding="utf-8")
     finally:
         tmp_path.unlink(missing_ok=True)
     return 0
