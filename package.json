@@ -1,0 +1,49 @@
+{
+  "name": "oh-my-goal",
+  "version": "0.1.0",
+  "description": "Codex-style /goal autonomous loop plugin for OpenCode.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "goal",
+    "automation"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.14.35"
+  },
+  "peerDependenciesMeta": {
+    "@opencode-ai/plugin": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.14.35",
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
