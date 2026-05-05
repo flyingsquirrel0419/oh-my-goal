@@ -15,14 +15,14 @@ def main() -> int:
         "/bin/bash",
         ["--noprofile", "--norc", "-i"],
         cwd="/root/oh-my-goal",
-        dimensions=(34, 120),
+        dimensions=(16, 120),
         encoding="utf-8",
         env=env,
     )
     child.logfile_read = sys.stdout
 
     child.expect(r"\$ ", timeout=10)
-    command = "opencode . --model zai-coding-plan/glm-5.1 --log-level ERROR"
+    command = "opencode"
     for char in command:
         child.send(char)
         time.sleep(0.025)
