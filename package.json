@@ -26,6 +26,14 @@
     "goal",
     "automation"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flyingsquirrel0419/oh-my-goal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flyingsquirrel0419/oh-my-goal/issues"
+  },
+  "homepage": "https://github.com/flyingsquirrel0419/oh-my-goal#readme",
   "license": "MIT",
   "dependencies": {
     "zod": "^3.25.76"
