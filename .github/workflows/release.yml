@@ -52,9 +52,9 @@ jobs:
 
       - name: Publish package
         if: ${{ env.NPM_TOKEN != '' }}
-        env:
-          NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
-        run: npm publish --access public
+        run: |
+          export NODE_AUTH_TOKEN="$(printf '%s' "$NPM_TOKEN" | tr -d '\r\n')"
+          npm publish --access public
 
       - name: Success summary
         if: success()
