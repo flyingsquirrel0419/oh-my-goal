@@ -1,6 +1,6 @@
 {
   "name": "oh-my-goal",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Codex-style /goal autonomous loop plugin for OpenCode.",
   "type": "module",
   "main": "dist/index.js",

@@ -19,6 +19,8 @@ Set one objective. Let the agent keep going until the work is done, blocked, pau
 
 ![oh-my-goal terminal demo](./docs/demo.svg)
 
+If this makes your OpenCode workflow better, please consider giving the repo a star.
+
 </div>
 
 ---
